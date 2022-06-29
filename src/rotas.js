@@ -1,8 +1,8 @@
 const express = require('express');
-const rotasTwitter = require('./controladores/rotasTwitter');
+const twitterQuery = require('./controladores/twitter')
 
 const rotas = express();
 
-rotas.get('/api/:id', rotasTwitter)
+rotas.get('/api/:id', twitterQuery);
 
 module.exports = rotas;
