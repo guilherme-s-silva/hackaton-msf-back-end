@@ -1,8 +1,8 @@
-const pool = require('pg')
+const knex = require('knex')({
+    client: 'pg',
+    connection: {
+        connectionString: process.env.PG_CONNECTION_STRING,
+        ssl: { rejectUnauthorized: false}} 
+});
 
-const pool = new Pool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-})
+module.exports = knex;
