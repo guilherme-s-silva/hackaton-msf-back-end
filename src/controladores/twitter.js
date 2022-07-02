@@ -1,7 +1,6 @@
 const axios = require('axios').default;
 const knex = require('../conexao');
 const fs = require('fs/promises');
-const { cachedDataVersionTag } = require('v8');
 
 const listarTweets = async () => {
 
@@ -171,7 +170,92 @@ const filtroTweets = async (req, res) => {
     }
 }
 
+const previewMembros = async (req, res) => {
+    try {
+        const membros = await listarMembros();
+
+        return res.status(200).json(membros.data)
+    } catch (error) {
+        return res.status(400).json(error.message)
+    }
+}
+
+const buscaPorTermo = async (req, res) => {
+    const { termo } = req.params;
+
+    try {
+        const palavrasChave = JSON.parse(await fs.readFile('./src/categorias/chaves.json'));
+
+        const tweets = await listarTweets();
+        const membros = await listarMembros();
+
+        const tweetsCombinados = [];
+
+        for(const tweet of tweets.data) {
+            for(const membro of membros.data) {
+                let tweetTratado = {};
+
+                if (tweet.author_id === membro.id){
+                    tweetTratado = {...tweet, ...membro}
+                    tweetsCombinados.push(tweetTratado);
+                }
+            }
+        }
+
+        const tweetsTratados = [];
+
+        tweetsCombinados.forEach(tweet => {
+            for(const item of palavrasChave){
+                if (tweet.text.toLowerCase().includes(item.toLowerCase())){
+                    return tweetsTratados.push(tweet);
+                }
+            } 
+        });
+
+        let token = tweets.meta.next_token;
+        while(tweetsTratados.length < 16){
+            const novosTweets = await proximosTweets(token);
+            
+            token = novosTweets.meta.next_token;
+            const tweetsAtuais = [];
+
+            for(const tweet of novosTweets.data) {
+                for(const membro of membros.data) {
+                    let tweetTratado = {};
+
+                    if (tweet.author_id === membro.id){
+                        tweetTratado = {...tweet, ...membro}
+                        tweetsAtuais.push(tweetTratado);
+                    }
+                }
+            }
+
+            tweetsAtuais.forEach(tweet => {
+                for(const item of palavrasChave){
+                    if (tweet.text.toLowerCase().includes(item.toLowerCase())){
+                        return tweetsTratados.push(tweet);
+                    }
+                }
+            });
+        }
+
+        const tweetsFiltrados = [];
+
+        tweetsTratados.forEach(tweet => {
+            if(tweet.text.toLowerCase().includes(termo)){
+                tweetsFiltrados.push(tweet);
+            }
+        })
+         
+        return res.status(200).json(tweetsFiltrados);
+    } catch (error) {
+        return res.status(400).json(error.message)
+    }
+}
+
 module.exports = {
     tweetsGerais,
-    filtroTweets
+    filtroTweets,
+    previewMembros,
+    buscaPorTermo
 }
