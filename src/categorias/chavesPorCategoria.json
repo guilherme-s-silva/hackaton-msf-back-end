@@ -1,0 +1,76 @@
+{
+    "categorias": [
+        {
+            "agua": [
+                "risco hidrológico",
+                "inundação",
+                "enchente",
+                "enxurrada",
+                "alagamento",
+                "risco de desabamento",
+                "rompimento de barragem",
+                "chuvas intensas",
+                "granizo",
+                "fortes chuvas",
+                "chuvas fortes",
+                "inundações",
+                "alagamentos",
+                "deslizamentos",
+                "elevações nos níveis dos rios",
+                "elevações dos níveis dos rios",
+                "elevações dos rios",
+                "chuva ácida",
+                "deslizamento",
+                "falta de chuvas",
+                "crise hídrica",
+                "estiagem"]
+        },
+        {
+            "ar": [
+                "umidade no ar",
+                "umidade do ar",
+                "ar seco",
+                "baixa umidade",
+                "tempo seco",
+                "amplitude térmica",
+                "frio intenso",
+                "tornado",
+                "tornados",
+                "ventania",
+                "ventanias",
+                "ciclone",
+                "ciclones",
+                "ciclone tropical",
+                "ciclone extratropical"
+            ] 
+        },
+        {
+            "fogo": [
+                "incêndio",
+                "queimada",
+                "queimadas",
+                "onda de calor",
+                "ondas de calor",
+                "maiores temperaturas"
+            ]
+        },
+        {
+            "frio": [
+                "onda de frio",
+                "massa de ar polar",
+                "geada",
+                "neve",
+                "ondas de frio",
+                "frente fria",
+                "menores temperaturas"
+            ] 
+        },
+        {
+            "terra": [
+                "tremor de terra",
+                "abalo sísmico",
+                "sismos"
+            ]
+        }
+    ]
+}
