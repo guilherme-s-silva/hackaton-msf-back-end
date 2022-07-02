@@ -21,3 +21,6 @@ Apesar da seleção do tema, é possível realizar a mudança no código fonte d
 * Lucas Viana - [LinkedIn](https://www.linkedin.com/in/lucas-viana-006156b2/) | [GitHub](https://github.com/Lukstorms) <br>
 * Wygna Xavier - [LinkedIn](https://www.linkedin.com/in/wygnaxavier) <br>
 
+### :file_folder: Repositórios
+- Front-end - https://github.com/guilherme-s-silva/hackaton-msf-front-end/
+- Back-end  - https://github.com/guilherme-s-silva/hackaton-msf-back-end/
