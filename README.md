@@ -2,7 +2,7 @@
   <img width="260" height="100" src="https://www.msf.org/themes/custom/msf_theme/src/kss/components/icons/assets/logo-white-en.svg">
 </p>
 
-# MSF & Thoughworks - Hackhathon - Equipe 451
+# MSF & Thoughworks - Hackhathon - Equipe 415
 
 O volume e a complexidade crescentes do fluxo de informações disponíveis tornaram desafiadora a realização de pesquisas qualificadas e relevantes que gerem insights sobre atores engajados nas pautas da MSF, seus pontos de vista, além de seu nível nível de influência no debate público e fóruns mais específicos. É também um desafio mapear onde estão sendo discutidas nossas pautas sobre saúde, política, meio ambiente e ajuda humanitária em âmbito nacional e internacional.Para ajudar a evoluir sua capacidade de mapear e analisar essas conversas, a Thoughtworks se juntou à MSF.
 
