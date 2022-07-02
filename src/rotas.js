@@ -3,6 +3,6 @@ const twitterQuery = require('./controladores/twitter');
 
 const rotas = express();
 
-rotas.get('/geral/:id', twitterQuery);
+rotas.get('/geral/', twitterQuery);
 
 module.exports = rotas;
