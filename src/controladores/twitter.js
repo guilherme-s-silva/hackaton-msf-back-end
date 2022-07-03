@@ -1,5 +1,4 @@
 const axios = require('axios').default;
-const knex = require('../conexao');
 const fs = require('fs/promises');
 
 const listarTweets = async () => {
