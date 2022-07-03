@@ -255,7 +255,7 @@ const buscaPorTermo = async (req, res) => {
 
 const filtroTweetsData = async (req, res) => {
     const { categoria, start, end } = req.params;
-
+    
     
 
     try {
