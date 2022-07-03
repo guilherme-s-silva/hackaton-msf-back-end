@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const { log } = require('console');
 const fs = require('fs/promises');
 
 const listarTweets = async () => {
@@ -252,9 +253,78 @@ const buscaPorTermo = async (req, res) => {
     }
 }
 
+const filtroTweetsData = async (req, res) => {
+    const { categoria, start, end } = req.params;
+    
+    
+
+    try {
+        const json = JSON.parse(await fs.readFile('./src/categorias/chavesPorCategoria.json'));
+        const elementos = json.categorias;
+        
+        const agua = elementos[0].agua;
+        const ar = elementos[1].ar;
+        const fogo = elementos[2].fogo;
+        const frio = elementos[3].frio;
+        const terra = elementos[4].terra;
+
+        let selecionado = [];
+
+        if(agua.includes(categoria)){
+            selecionado = [...agua]
+        }else if(ar.includes(categoria)){
+            selecionado = [...ar]
+        }else if(fogo.includes(categoria)){
+            selecionado = [...fogo]
+        }else if(frio.includes(categoria)){
+            selecionado = [...frio]
+        }else if(terra.includes(categoria)){
+            selecionado = [...terra]
+        }
+
+        const tweets = await listarTweets();
+        const membros = await listarMembros();
+
+        const tweetsCombinados = [];
+
+        for(const tweet of tweets.data) {
+            for(const membro of membros.data) {
+                let tweetTratado = {};
+
+                if (tweet.author_id === membro.id){
+                    tweetTratado = {...tweet, ...membro}
+                    tweetsCombinados.push(tweetTratado);
+                }
+            }
+        }
+        
+        const inicio = new Date(start).setHours(0, 0, 0, 0);
+        const fim = new Date(end).setHours(0, 0, 0, 0);            
+        
+        const tweetsTratados = [];        
+
+        tweetsCombinados.forEach(tweet => {
+            
+            const dia = new Date(tweet.created_at).setHours(0, 0, 0, 0);
+            for(const item of selecionado){
+                
+                if (tweet.text.toLowerCase().includes(item.toLowerCase()) && dia >= inicio && dia <= fim){
+                    return tweetsTratados.push(tweet);
+                }
+            } 
+        });
+        
+
+        return res.status(200).json(tweetsTratados)
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
 module.exports = {
     tweetsGerais,
     filtroTweets,
     previewMembros,
-    buscaPorTermo
+    buscaPorTermo,
+    filtroTweetsData
 }
